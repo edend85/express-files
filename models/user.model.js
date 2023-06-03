@@ -17,6 +17,7 @@ class User {
         this.address = [{city:address[0],street:address[1],streetNum:address[2]}];   
     }
 
+
     static async FindOneUser(e,p){
         let query = {$and:[{"email":{$eq:e},"password":{$eq:p}}]};
         return await new DB().FindOneUser('users',query);
