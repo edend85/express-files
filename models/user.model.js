@@ -1,17 +1,19 @@
 const DB = require('../utils/db');
 
 class User {
-    //userId;
+    userId;
     firstName;
     lastName;
+    role;
     email;
     password;
     address;
 
-    constructor(userId,firstName,lastName,email,password, address) {
+    constructor(userId,firstName,lastName,role,email,password, address) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
         this.email = email;
         this.password = password;
         this.address = [{city:address[0],street:address[1],streetNum:address[2]}];   
