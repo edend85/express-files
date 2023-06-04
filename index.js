@@ -3,6 +3,9 @@ const express = require('express');
 const path = require('node:path');
 const cors = require('cors');
 const DB = require('./utils/db');
+
+
+// Only for Dev
 const db = new DB();
 
 const port =process.env.PORT || 3000;
