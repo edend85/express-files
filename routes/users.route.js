@@ -2,7 +2,7 @@ const UserModel = require('../models/user.model');
 const UsersRoutes = require('express').Router();
 
 
-UsersRoutes.get('/:email/:password', async (req, res) => {
+UsersRoutes.post('/:email/:password', async (req, res) => {
     try {
         let { email,password } = req.params;
         let data = await UserModel.FindOneUser(email,password);
