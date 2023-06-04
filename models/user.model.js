@@ -19,6 +19,29 @@ class User {
         this.address = [{city:address[0],street:address[1],streetNum:address[2]}];   
     }
 
+    // Work !
+    static async FindAllUsers() {
+        return await new DB().FindAll('Users');
+    }
+
+    // Work !
+    static async FindAllRegulators() {
+        let query = {"role":{$eq: "Regulator"}}
+        return await new DB().FindAll('Users', query);
+    }
+
+    // Work !
+    static async FindAllReasercher() {
+        let query = {"role":{$eq: "Reasercher"}}
+        return await new DB().FindAll('Users', query);
+    }
+
+
+
+
+
+
+    
 
     static async FindOneUser(e,p){
         let query = {$and:[{"email":{$eq:e},"password":{$eq:p}}]};

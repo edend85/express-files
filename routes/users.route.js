@@ -2,6 +2,45 @@ const UserModel = require('../models/user.model');
 const UsersRoutes = require('express').Router();
 
 
+// Get All Users - Work!
+UsersRoutes.get('/', async (req, res) => {
+    try {
+        let data = await UserModel.FindAllUsers();
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+});
+
+
+
+// Get All Regulators - Work!
+UsersRoutes.get('/regulators', async (req, res) => {
+    try {
+        let data = await UserModel.FindAllRegulators();
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+});
+
+
+// Get All Reasercher - Work!
+UsersRoutes.get('/reasercher', async (req, res) => {
+    try {
+        let data = await UserModel.FindAllReasercher();
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+});
+
+
+
+
+
+
+
 UsersRoutes.post('/:email/:password', async (req, res) => {
     try {
         let { email,password } = req.params;
@@ -20,7 +59,7 @@ UsersRoutes.put('/:email/:password', async (req, res) => {
         res.status(500).json({ error });
     }
 });
-UsersRoutes.put('/', async (req, res) => {
+UsersRoutes.put('/dsa', async (req, res) => {
     try {
         let { user } = req.body;
         let data = await UserModel.InsertUser(user);

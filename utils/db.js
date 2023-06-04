@@ -1,15 +1,46 @@
 const { MongoClient, ObjectId } = require('mongodb');
+require('dotenv').config({ path: './utils/.env' });
+
 
 class DB {
     db_uri;
     db_name;
     client;
 
+
     constructor() {
         this.db_uri = process.env.DB_URI;
         this.db_name = process.env.DB_NAME;
-        this.client = new MongoClient(this.db_uri);
+        this.client = new MongoClient(this.db_uri, { useUnifiedTopology: true });
+        this.connect();
+      }
+    
+
+      // to check if we connected to DB - Only for Dev
+      async connect() {
+        try {
+          await this.client.connect();
+          console.log('Connected to the database');
+        } catch (error) {
+          console.error('Failed to connect to the database:', error);
+        }
+      }
+
+
+
+      async FindAll(collection, query = {}, project = {}) {
+        try {
+            await this.client.connect();
+            return await this.client.db(this.db_name).collection(collection).find(query, project).toArray();
+        } catch (error) {
+            throw error;
+        }
+        finally {
+            await this.client.close();
+        }
     }
+
+
 
     //user actions
     async FindOneUser(collection, query) {
@@ -57,7 +88,10 @@ class DB {
             await this.client.close();
         }
     }
+
     //reports actions
+
+    // Work
     async ShowAllReports(collection, query = {}, project = {}) {
         try {
             await this.client.connect();
@@ -69,6 +103,8 @@ class DB {
             await this.client.close();
         }
     }
+
+    // Work
     async ShowReportByCity(collection, query, project = {}) {
         try {
             await this.client.connect();

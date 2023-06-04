@@ -2,8 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const path = require('node:path');
 const cors = require('cors');
-const port =process.env.PORT || 3000;
+const DB = require('./utils/db');
+const db = new DB();
 
+const port =process.env.PORT || 3000;
 //creating server
 let server = express();
 server.use(express.json());

@@ -1,6 +1,8 @@
 const ReportModel = require('../models/report.model');
 const ReportsRoutes = require('express').Router();
 
+
+// Find All Reports - Work !
 ReportsRoutes.get('/', async (req, res) => {
     try {
         let data = await ReportModel.ShowAllReports();
@@ -9,6 +11,9 @@ ReportsRoutes.get('/', async (req, res) => {
         res.status(500).json({ error });
     }
 });
+
+
+// Find Reports By City - Work !
 ReportsRoutes.get('/:city', async (req, res) => {
     try {
         let { city } = req.params;
@@ -18,9 +23,12 @@ ReportsRoutes.get('/:city', async (req, res) => {
         res.status(500).json({ error });
     }
 });
-ReportsRoutes.get('/', async (req, res) => {
+
+
+
+ReportsRoutes.get('/:userId', async (req, res) => {
     try {
-        let { report } = req.body;
+        let { userId } = req.body;
         let data = await ReportModel.ShowUserReports(report);
         res.status(200).json(data);
     } catch (error) {
