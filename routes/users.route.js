@@ -26,7 +26,7 @@ UsersRoutes.get('/regulators', async (req, res) => {
 
 
 // Get All Reasercher - Work!
-UsersRoutes.get('/reasercher', async (req, res) => {
+UsersRoutes.get('/reaserchers', async (req, res) => {
     try {
         let data = await UserModel.FindAllReasercher();
         res.status(200).json(data);
