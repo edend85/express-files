@@ -36,7 +36,16 @@ UsersRoutes.get('/reaserchers', async (req, res) => {
 });
 
 
-
+// Add New User From Register
+UsersRoutes.post('/Register', async (req, res) => {
+    try {
+        let { firstName,lastName,email,password,phone,address,role,smoke,img,IsActive } = req.body;
+        let data = await UserModel.InsertUser(firstName,lastName,email,password,phone,address,role,smoke,img,IsActive);
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+});
 
 
 
@@ -54,15 +63,6 @@ UsersRoutes.put('/:email/:password', async (req, res) => {
     try {
         let { email,password } = req.params;
         let data = await UserModel.UpdateUser(email,password);
-        res.status(200).json(data);
-    } catch (error) {
-        res.status(500).json({ error });
-    }
-});
-UsersRoutes.post('/Register', async (req, res) => {
-    try {
-        let { firstName,lastName,email,password,phone,address,role,smoke,img,IsActive } = req.body;
-        let data = await UserModel.InsertUser(firstName,lastName,email,password,phone,address,role,smoke,img,IsActive);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error });
