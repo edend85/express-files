@@ -59,10 +59,10 @@ UsersRoutes.put('/:email/:password', async (req, res) => {
         res.status(500).json({ error });
     }
 });
-UsersRoutes.put('/dsa', async (req, res) => {
+UsersRoutes.post('/Register', async (req, res) => {
     try {
-        let { user } = req.body;
-        let data = await UserModel.InsertUser(user);
+        let { firstName,lastName,email,password,phone,address,role,smoke,img,IsActive } = req.body;
+        let data = await UserModel.InsertUser(firstName,lastName,email,password,phone,address,role,smoke,img,IsActive);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error });
