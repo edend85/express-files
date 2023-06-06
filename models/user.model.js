@@ -1,13 +1,18 @@
 const DB = require('../utils/db');
+const bcrypt = require('bcrypt');
 
 class User {
     userId;
     firstName;
     lastName;
-    role;
     email;
     password;
+    phone;
     address;
+    role;
+    smoke;
+    img;
+    isActive;
 
     constructor(userId,firstName,lastName,role,email,password, address) {
         this.userId = userId;
@@ -39,8 +44,6 @@ class User {
 
 
 
-
-
     
 
     static async FindOneUser(e,p){
@@ -51,8 +54,19 @@ class User {
         let query = {$and:[{"email":{$eq:e},"password":{$eq:p}}]};
         return await new DB().UpdateUser('users',query);
     }
-    static async InsertUser(doc){
-        return await new DB().InsertUser('users',doc);
+    static async InsertUser(firstName,lastName,email,password,phone,address,role,smoke,img,isActive){
+       this.firstName = firstName;
+       this.lastName = lastName;
+       this.email = email;
+       this.password = await bcrypt.hash(password,10);
+       this.phone = phone;
+       this.address = address;
+       this.role = role;
+       this.smoke = smoke;
+       this.img = img;
+       this.isActive = isActive;
+       
+        return await new DB().InsertUser('Users',{...this});
     }
     static async RemovetUser(id){
         let query = {"id":{$eq:id}}
