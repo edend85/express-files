@@ -10,6 +10,7 @@ class Info{
     }
 
     static async ShowAllQuerys() {
+        console.log('2');
         return await new DB().ShowAllQuerys('Information');
     }
     static async AddQuery(title,description) {
@@ -17,9 +18,12 @@ class Info{
         this.description = description
         return await new DB().AddQuery('Information',{...this});
     }
+    //aggrgtion
     static async UpdateQuery(id,des) {
+        this.id = id;
+        this.description = des;
         let query = {"infoId":{$eq:id}}
-        let desUpdate = ({description},{$set:des});
+        let desUpdate = (description,{$set:des});
         return await new DB().UpdateQuery('Information',query,desUpdate);
     }
 }
