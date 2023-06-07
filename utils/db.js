@@ -116,9 +116,11 @@ class DB {
             await this.client.close();
         }
     }
-    async ShowUserReports(collection, query, project = {}) {
+    async ShowUserReports(collection, id) {
         try {
             await this.client.connect();
+            let query = await{_id: new ObjectId(id)}
+            let project = await {"reports":1}
             return await this.client.db(this.db_name).collection(collection).find(query, project).toArray();
         } catch (error) {
             throw error;
