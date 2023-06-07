@@ -1,6 +1,7 @@
 const InfoModel = require('../models/info.model');
 const InfoRoutes = require('express').Router();
 
+//working
 InfoRoutes.get('/', async (req, res) => {
     try {
         let data = await InfoModel.ShowAllQuerys();
@@ -8,17 +9,19 @@ InfoRoutes.get('/', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error });
     }
+    console.log('3');
 });
+//working
 InfoRoutes.put('/', async (req, res) => {
-    let {title,description} = req.body;
     try {
+        let {title,description} = req.body;
         let data = await InfoModel.AddQuery(title,description);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error });
     }
 });
-InfoRoutes.put('/:id/:description', async (req, res) => {
+InfoRoutes.put('/:id', async (req, res) => {
     try {
         let {id} = req.params;
         let { description } = req.body;
