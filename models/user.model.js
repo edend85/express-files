@@ -68,9 +68,9 @@ class User {
        
         return await new DB().InsertUser('Users',{...this});
     }
-    static async RemovetUser(id){
+    static async DisableUser(id){
         let query = {"id":{$eq:id}}
-        return await new DB().RemovetUser('users',query);
+        return await new DB().DisableUser('Users',query);
     }
     
 }
