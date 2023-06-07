@@ -139,7 +139,7 @@ class DB {
         }
     }
     //info actions
-    async ShowAllInfo(collection, query = {}, project = {}) {
+    async ShowAllQuerys(collection, query = {}, project = {}) {
         try {
             await this.client.connect();
             return await this.client.db(this.db_name).collection(collection).find(query, project).toArray();
@@ -150,7 +150,7 @@ class DB {
             await this.client.close();
         }
     }
-    async AddlInfo(collection, doc) {
+    async AddQuery(collection, doc) {
         try {
             await this.client.connect();
             return await this.client.db(this.db_name).collection(collection).insertOne(doc);
@@ -161,7 +161,7 @@ class DB {
             await this.client.close();
         }
     }
-    async UpdateInfo(collection, query, doc) {
+    async UpdateQuery(collection, query, doc) {
         try {
             await this.client.connect();
             return await this.client.db(this.db_name).collection(collection).updateOne(query, doc);
