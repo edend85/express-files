@@ -77,10 +77,10 @@ class DB {
             await this.client.close();
         }
     }
-    async RemovetUser(collection, doc) {
+    async DisableUser(collection, doc) {
         try {
             await this.client.connect();
-            return await this.client.db(this.db_name).collection(collection).deleteOne(doc);
+            return await this.client.db(this.db_name).collection(collection).UpdateUser(doc);
         } catch (error) {
             throw error;
         }
