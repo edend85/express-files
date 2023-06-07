@@ -27,13 +27,15 @@ ReportsRoutes.get('/:city', async (req, res) => {
 
 
 ReportsRoutes.get('/:userId', async (req, res) => {
+    console.log('1');
     try {
-        let { userId } = req.body;
-        let data = await ReportModel.ShowUserReports(report);
+        let { userId } = req.params;
+        let data = await ReportModel.ShowUserReports(userId);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error });
     }
+    console.log('3');
 });
 ReportsRoutes.put('/', async (req, res) => {
     try {
