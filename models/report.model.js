@@ -3,6 +3,7 @@ const DB = require('../utils/db');
 class Report{
 
     type;
+    locationName;
     details;
     image;
     address;
@@ -31,11 +32,18 @@ class Report{
 
 
     static async ShowUserReports(userId) {
-        console.log('2');
+        
         return await new DB().ShowUserReports('Reports',userId);
     }
-    static async InsertNewReport(doc) {
-        return await new DB().InsertNewReport('reports',doc);
+
+    static async InsertNewReport(type,locationName,details,image,address) {
+        console.log('3 :>> ');
+        this.type = type;
+        this.locationName = locationName;
+        this.details = details;
+        this.image = image;
+        this.address = address;
+        return await new DB().InsertNewReport('Reports',{...this});
     }
 }
 
