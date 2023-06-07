@@ -37,10 +37,6 @@ UsersRoutes.get('/reaserchers', async (req, res) => {
 
 
 
-
-
-
-
 UsersRoutes.post('/:email/:password', async (req, res) => {
     try {
         let { email,password } = req.params;
@@ -50,7 +46,7 @@ UsersRoutes.post('/:email/:password', async (req, res) => {
         res.status(500).json({ error });
     }
 });
-UsersRoutes.put('/:email/:password', async (req, res) => {
+UsersRoutes.put('/:id', async (req, res) => {
     try {
         let { email,password } = req.params;
         let data = await UserModel.UpdateUser(email,password);
@@ -72,7 +68,7 @@ UsersRoutes.post('/Register', async (req, res) => {
 UsersRoutes.delete('/:id', async (req, res) => {
     try {
         let { id } = req.params;
-        let data = await UserModel.RemovetUser(id);
+        let data = await UserModel.DisableUser(id);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error });
