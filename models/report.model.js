@@ -30,8 +30,9 @@ class Report{
 
 
 
-    static async ShowUserReports() {
-        return await new DB().ShowUserReports('Reports');
+    static async ShowUserReports(userId) {
+        console.log('2');
+        return await new DB().ShowUserReports('Reports',userId);
     }
     static async InsertNewReport(doc) {
         return await new DB().InsertNewReport('reports',doc);
