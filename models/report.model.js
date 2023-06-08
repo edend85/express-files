@@ -32,18 +32,16 @@ class Report{
 
 
     static async ShowUserReports(userId) {
-        
         return await new DB().ShowUserReports('Reports',userId);
     }
 
-    static async InsertNewReport(type,locationName,details,image,address) {
-        console.log('3 :>> ');
+    static async InsertNewReport(userId,type,locationName,details,image,address) {
         this.type = type;
         this.locationName = locationName;
         this.details = details;
         this.image = image;
         this.address = address;
-        return await new DB().InsertNewReport('Reports',{...this});
+        return await new DB().InsertNewReport('Reports',userId,{...this});
     }
 }
 
