@@ -1,3 +1,4 @@
+const { query } = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 require('dotenv').config({ path: './utils/.env' });
 
@@ -43,7 +44,20 @@ class DB {
 
 
     //user actions
-    async FindOneUser(collection, query) {
+    async FindUserbyId(collection, id) {
+        try {
+            await this.client.connect();
+            let userId = await new ObjectId(id);
+            let query = await {_id:{$eq:userId}}
+            return await this.client.db(this.db_name).collection(collection).findOne(query);
+        } catch (error) {
+            throw error;
+        }
+        finally {
+            await this.client.close();
+        }
+    }
+    async FindUser(collection, query) {
         try {
             await this.client.connect();
             return await this.client.db(this.db_name).collection(collection).findOne(query);
@@ -129,9 +143,10 @@ class DB {
             await this.client.close();
         }
     }
-    async InsertNewReport(collection, doc) {
+    async InsertNewReport(collection,userId, doc) {
         try {
             await this.client.connect();
+            let userId = new ObjectId(id);
             return await this.client.db(this.db_name).collection(collection).insertOne(doc);
         } catch (error) {
             throw error;
