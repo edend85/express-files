@@ -44,9 +44,11 @@ class User {
 
 
 
-    
+    static async FindUserbyId(id){
+        return await new DB().FindUserbyId('users',id);
+    }
 
-    static async FindOneUser(e,p){
+    static async FindUser(e,p){
         let query = {$and:[{"email":{$eq:e},"password":{$eq:p}}]};
         return await new DB().FindOneUser('users',query);
     }
