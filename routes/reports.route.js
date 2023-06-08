@@ -28,7 +28,6 @@ ReportsRoutes.get('/:city', async (req, res) => {
 
 ReportsRoutes.get('/userId', async (req, res) => {
     try {
-        console.log('1 :>> ');
         let { userId } = req.params;
         let data = await ReportModel.ShowUserReports(userId);
         res.status(200).json(data);
@@ -37,14 +36,14 @@ ReportsRoutes.get('/userId', async (req, res) => {
     }
     console.log('3');
 });
-ReportsRoutes.put('/', async (req, res) => {
+//working
+ReportsRoutes.put('/userId', async (req, res) => {
     try {
+        let { userId } = req.params;
         let { type,locationName,details,image,address } = req.body;
-        console.log(type+""+locationName+""+details+""+image+""+address);
-        let data = await ReportModel.InsertNewReport(type,locationName,details,image,address);
+        let data = await ReportModel.InsertNewReport(userId,type,locationName,details,image,address);
         res.status(200).json(data);
     } catch (error) {
-        console.log('2');
         res.status(500).json({ error });
     }
 });
