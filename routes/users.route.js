@@ -53,8 +53,8 @@ UsersRoutes.post('/Register', async (req, res) => {
 UsersRoutes.post('/add/:role', async (req, res) => {
     let { role } = req.params;
     try {
-        let { firstName,lastName,email,password,phone,img,IsActive } = req.body;
-        let data = await UserModel.InsertRole(firstName,lastName,email,password,phone,role,img,IsActive);
+        let { firstName,lastName,email,password,phone,img } = req.body;
+        let data = await UserModel.InsertRole(firstName,lastName,email,password,phone,role,img,true);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error });
