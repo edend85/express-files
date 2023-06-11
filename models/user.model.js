@@ -72,6 +72,20 @@ class User {
        
         return await new DB().InsertUser('Users',{...this});
     }
+
+
+    static async InsertRole(firstName,lastName,email,password,phone,role,img,isActive){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = await bcrypt.hash(password,10);
+        this.phone = phone;
+        this.role = role;
+        this.img = img;
+        this.isActive = isActive;
+        
+         return await new DB().InsertUser('Users',{...this});
+     }
     static async DisableUser(id){
         let query = {"id":{$eq:id}}
         return await new DB().DisableUser('Users',query);
