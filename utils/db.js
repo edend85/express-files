@@ -1,4 +1,3 @@
-const { query } = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 require('dotenv').config({ path: './utils/.env' });
 
@@ -57,10 +56,12 @@ class DB {
             await this.client.close();
         }
     }
-    async FindUser(collection, query) {
+    async Login(collection, email,password) {
         try {
+            await console.log('4 :>> ');
             await this.client.connect();
-            return await this.client.db(this.db_name).collection(collection).findOne(query);
+            let query = await {$and:[{"email":{$eq:email},"password":{$eq:password}}]};
+            return await this.client.db(this.db_name).collection(collection).findOne(query,{});
         } catch (error) {
             throw error;
         }
