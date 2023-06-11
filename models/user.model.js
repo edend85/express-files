@@ -48,9 +48,11 @@ class User {
         return await new DB().FindUserbyId('users',id);
     }
 
-    static async FindUser(e,p){
-        let query = {$and:[{"email":{$eq:e},"password":{$eq:p}}]};
-        return await new DB().FindOneUser('users',query);
+    static async Login(e,p){
+        await console.log('2 :>> ');
+        this.email = e;
+        this.password = await bcrypt.hash(p,10);
+        return await new DB().Login('users',this.email,this.password);
     }
     static async UpdateUser(e,p){
         let query = {$and:[{"email":{$eq:e},"password":{$eq:p}}]};

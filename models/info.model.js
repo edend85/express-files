@@ -10,7 +10,6 @@ class Info{
     }
 
     static async ShowAllQuerys() {
-        console.log('2');
         return await new DB().ShowAllQuerys('Information');
     }
     static async AddQuery(title,description) {
