@@ -51,6 +51,7 @@ UsersRoutes.post('/Register', async (req, res) => {
 
 
 // Add New User From role
+// working
 UsersRoutes.post('/add/:role', async (req, res) => {
     try {
         let { role } = req.params;
@@ -85,6 +86,8 @@ UsersRoutes.put('/:id', async (req, res) => {
         res.status(500).json({ error });
     }
 });
+
+
 //Add ObjectId
 UsersRoutes.delete('/:id', async (req, res) => {
     try {
