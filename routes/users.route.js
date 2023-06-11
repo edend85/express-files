@@ -38,6 +38,7 @@ UsersRoutes.get('/reaserchers', async (req, res) => {
 
 
 // Add New User From Register
+//working
 UsersRoutes.post('/Register', async (req, res) => {
     try {
         let { firstName,lastName,email,password,phone,address,role,smoke,img,IsActive } = req.body;
@@ -50,11 +51,14 @@ UsersRoutes.post('/Register', async (req, res) => {
 
 
 
-UsersRoutes.post('/:email/:password', async (req, res) => {
+UsersRoutes.post('/Login', async (req, res) => {
     try {
-        let { email,password } = req.params;
-        let data = await UserModel.FindOneUser(email,password);
+        await console.log('1 :>> ');
+        let { email,password } =  await req.body;
+        await console.log('e :>> '+ email + ' p :>> ' + password);
+        let data = await UserModel.Login(email,password);
         res.status(200).json(data);
+        await console.log('3 :>> ');
     } catch (error) {
         res.status(500).json({ error });
     }
