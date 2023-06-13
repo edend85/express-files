@@ -65,14 +65,12 @@ UsersRoutes.post('/add/:role', async (req, res) => {
 
 
 
-UsersRoutes.post('/Login', async (req, res) => {
+UsersRoutes.post('/Login/:email/:password', async (req, res) => {
     try {
-        await console.log('1 :>> ');
-        let { email,password } =  await req.body;
+        let { email,password } = req.params;
         await console.log('e :>> '+ email + ' p :>> ' + password);
         let data = await UserModel.Login(email,password);
         res.status(200).json(data);
-        await console.log('3 :>> ');
     } catch (error) {
         res.status(500).json({ error });
     }
