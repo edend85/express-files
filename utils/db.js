@@ -58,10 +58,9 @@ class DB {
     }
     async Login(collection, email,password) {
         try {
-            await console.log('4 :>> ');
             await this.client.connect();
-            let query = await {$and:[{"email":{$eq:email},"password":{$eq:password}}]};
-            return await this.client.db(this.db_name).collection(collection).findOne(query,{});
+            let user =  await this.client.db(this.db_name).collection(collection).findOne({"email":{$eq:email}
+        },{});
         } catch (error) {
             throw error;
         }
