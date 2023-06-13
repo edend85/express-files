@@ -2,11 +2,15 @@ const DB = require('../utils/db');
 
 class Report{
 
+    date;
     type;
-    locationName;
+    location;
+    address;
+    place;
     details;
     image;
-    address;
+    reporter;
+    
 
     constructor(type,details,image,address){
 
@@ -35,13 +39,16 @@ class Report{
         return await new DB().ShowUserReports('Reports',userId);
     }
 
-    static async InsertNewReport(userId,type,locationName,details,image,address) {
+    static async InsertNewReport(date,type,location,address,place,details,image,reporter) {
+        this.date = date;
         this.type = type;
-        this.locationName = locationName;
+        this.location = location;
+        this.address = address;
+        this.place = place;
         this.details = details;
         this.image = image;
-        this.address = address;
-        return await new DB().InsertNewReport('Reports',userId,{...this});
+        this.reporter = this.reporter;
+        return await new DB().InsertNewReport('Reports',{...this});
     }
 }
 
