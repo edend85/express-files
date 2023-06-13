@@ -47,7 +47,7 @@ class Report{
         this.place = place;
         this.details = details;
         this.image = image;
-        this.reporter = this.reporter;
+        this.reporter = reporter;
         return await new DB().InsertNewReport('Reports',{...this});
     }
 }
