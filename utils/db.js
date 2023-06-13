@@ -144,10 +144,10 @@ class DB {
             await this.client.close();
         }
     }
-    async InsertNewReport(collection,userId, doc) {
+    async InsertNewReport(collection, doc) {
         try {
             await this.client.connect();
-            let id = new ObjectId(userId);
+            //let id = new ObjectId(userId);
             return await this.client.db(this.db_name).collection(collection).insertOne(doc);
         } catch (error) {
             throw error;
