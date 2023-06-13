@@ -37,11 +37,11 @@ ReportsRoutes.get('/userId', async (req, res) => {
     console.log('3');
 });
 //working
-ReportsRoutes.put('/userId', async (req, res) => {
+ReportsRoutes.put('/AddReport', async (req, res) => {
     try {
-        let { userId } = req.params;
-        let { type,locationName,details,image,address } = req.body;
-        let data = await ReportModel.InsertNewReport(userId,type,locationName,details,image,address);
+        //let { userId } = req.params;
+        let {date,type,location,address,place,details,image,reporter} = req.body;
+        let data = await ReportModel.InsertNewReport(date,type,location,address,place,details,image,reporter);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error });
