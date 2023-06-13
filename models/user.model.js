@@ -49,14 +49,13 @@ class User {
     }
 
     static async Login(e,p){
-        await console.log('2 :>> ');
         this.email = e;
         this.password = await bcrypt.hash(p,10);
         return await new DB().Login('users',this.email,this.password);
     }
     static async UpdateUser(e,p){
         let query = {$and:[{"email":{$eq:e},"password":{$eq:p}}]};
-        return await new DB().UpdateUser('users',query);
+        return await new DB().UpdateUser('Users',query);
     }
     static async InsertUser(firstName,lastName,email,password,phone,address,role,smoke,img,isActive){
        this.firstName = firstName;
