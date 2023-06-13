@@ -147,7 +147,7 @@ class DB {
     async InsertNewReport(collection,userId, doc) {
         try {
             await this.client.connect();
-            let userId = new ObjectId(id);
+            let id = new ObjectId(userId);
             return await this.client.db(this.db_name).collection(collection).insertOne(doc);
         } catch (error) {
             throw error;
