@@ -58,9 +58,9 @@ class DB {
     }
     async Login(collection, email,password) {
         try {
-            console.log(email,password);
             await this.client.connect();
-            return await this.client.db(this.db_name).collection(collection).find();
+            let q = {email:{$eq:email}}
+            let user = await this.client.db(this.db_name).collection(collection).find(q,{});
         } catch (error) {
             throw error;
         }
