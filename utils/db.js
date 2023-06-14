@@ -58,9 +58,9 @@ class DB {
     }
     async Login(collection, email,password) {
         try {
-            console.log('login db start ');
+            console.log(email,password);
             await this.client.connect();
-            return await this.client.db(this.db_name).collection(collection).findOne({email:{$eq:email}});
+            return await this.client.db(this.db_name).collection(collection).find();
         } catch (error) {
             throw error;
         }
@@ -71,7 +71,7 @@ class DB {
     async UpdateUser(collection, query) {
         try {
             await this.client.connect();
-            let doc = FindOneUser('users', query)
+            let doc = FindOneUser('Users', query)
             return await this.client.db(this.db_name).collection(collection).UpdateOne(doc);
         } catch (error) {
             throw error;
