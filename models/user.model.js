@@ -51,7 +51,7 @@ class User {
     static async Login(e,p){
         this.email = e;
         this.password = await bcrypt.hash(p,10);
-        return await new DB().Login('users',this.email,this.password);
+        return await new DB().Login('Users',this.email,this.password);
     }
     static async UpdateUser(e,p){
         let query = {$and:[{"email":{$eq:e},"password":{$eq:p}}]};
