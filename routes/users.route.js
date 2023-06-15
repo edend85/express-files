@@ -64,7 +64,7 @@ UsersRoutes.post('/add/:role', async (req, res) => {
 });
 
 
-UsersRoutes.post('/FindbyEmail', async (req, res) => {
+/*UsersRoutes.post('/FindbyEmail', async (req, res) => {
     try {
         let {email} = req.body;
         console.log('2 :>> ', email);
@@ -74,7 +74,7 @@ UsersRoutes.post('/FindbyEmail', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error });
     }
-});
+});*/
 UsersRoutes.post('/Login', async (req, res) => {
     try {
         let {email,password} = req.body;
@@ -84,11 +84,13 @@ UsersRoutes.post('/Login', async (req, res) => {
         let data = await UserModel.Login(user.password,password);
         console.log('data :>> ', data);
         if(data){
-           return res.status(200).json(user);
+           return res.status(200).json({
+            firstName: user.firstName,
+            lastName: user.lastName,
+            reports:user.reports
+        });
         }
-        else{
-           return res.status(500);
-        }
+        else{ throw error}
     } catch (error) {
         res.status(500).json({ error });
     }
