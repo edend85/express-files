@@ -65,7 +65,7 @@ UsersRoutes.post('/add/:role', async (req, res) => {
 });
 
 
-UsersRoutes.post('/', async (req, res) => {
+UsersRoutes.post('/FindbyEmail', async (req, res) => {
     try {
         let {email} = req.body;
         console.log('2 :>> ', email);
