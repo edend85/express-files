@@ -56,11 +56,22 @@ class DB {
             await this.client.close();
         }
     }
-    async Login(collection, email,password) {
+    async FindbyEmail(collection,query={},project={}){
+        try{
+            await this.client.connect();
+            console.log('1 :>> ');
+            return await this.client.db(this.db_name).collection(collection).findOne(query,project);
+        }catch(error){
+            throw error;
+        }
+        finally {
+            await this.client.close();
+        }
+    }
+    async Login(collection, query={},project={}) {
         try {
             await this.client.connect();
-            let q = {email:{$eq:email}}
-            let user = await this.client.db(this.db_name).collection(collection).find(q,{});
+            return await this.client.db(this.db_name).collection(collection).find({},{});
         } catch (error) {
             throw error;
         }
