@@ -47,11 +47,17 @@ class User {
     static async FindUserbyId(id){
         return await new DB().FindUserbyId('users',id);
     }
+    static async FindbyEmail(email){
+        console.log('start :>> ');
+        let query = {"email":{$eq:email}}
+        return await new DB().FindbyEmail('Users',query);
+    }
 
-    static async Login(e,p){
-        this.email = e;
+    static async Login(userPassword,p){
+        //this.email = e;
         this.password = await bcrypt.hash(p,10);
-        return await new DB().Login('Users',this.email,this.password);
+        let query = bcrypt.compare(userPassword,p);
+        return await new DB().Login('Users',query);
     }
     static async UpdateUser(e,p){
         let query = {$and:[{"email":{$eq:e},"password":{$eq:p}}]};
