@@ -1,7 +1,6 @@
-const User = require('../models/user.model');
 const UserModel = require('../models/user.model');
 const UsersRoutes = require('express').Router();
-const bcrypt = require('bcrypt');
+
 
 // Get All Users - Work!
 UsersRoutes.get('/', async (req, res) => {
@@ -79,8 +78,17 @@ UsersRoutes.post('/FindbyEmail', async (req, res) => {
 UsersRoutes.post('/Login', async (req, res) => {
     try {
         let {email,password} = req.body;
-        let data = await UserModel.Login(email,password);
-        res.status(200).json(data);
+        let user = await UserModel.FindbyEmail(email);
+        if(!user){return undefined}
+        console.log('user :>> ', user);
+        let data = await UserModel.Login(user.password,password);
+        console.log('data :>> ', data);
+        if(data){
+           return res.status(200).json(user);
+        }
+        else{
+           return res.status(500);
+        }
     } catch (error) {
         res.status(500).json({ error });
     }
