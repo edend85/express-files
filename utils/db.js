@@ -68,7 +68,7 @@ class DB {
             await this.client.close();
         }
     }
-    async Login(collection, query={},project={}) {
+    /*async Login(collection, query={},project={}) {
         try {
             await this.client.connect();
             return await this.client.db(this.db_name).collection(collection).find({},{});
@@ -78,7 +78,7 @@ class DB {
         finally {
             await this.client.close();
         }
-    }
+    }*/
     async UpdateUser(collection, query) {
         try {
             await this.client.connect();
