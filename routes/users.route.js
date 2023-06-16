@@ -44,6 +44,7 @@ UsersRoutes.post('/Register', async (req, res) => {
         console.log('regi :>> ');
         let { firstName,lastName,email,password,phone,address,role,smoke,img,IsActive } = req.body;
         let data = await UserModel.InsertUser(firstName,lastName,email,password,phone,address,role,smoke,img,IsActive);
+        console.log('data :>> ',data);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error });
