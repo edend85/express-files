@@ -41,6 +41,7 @@ UsersRoutes.get('/reaserchers', async (req, res) => {
 //working
 UsersRoutes.post('/Register', async (req, res) => {
     try {
+        console.log('regi :>> ');
         let { firstName,lastName,email,password,phone,address,role,smoke,img,IsActive } = req.body;
         let data = await UserModel.InsertUser(firstName,lastName,email,password,phone,address,role,smoke,img,IsActive);
         res.status(200).json(data);
