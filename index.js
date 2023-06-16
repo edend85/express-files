@@ -29,7 +29,5 @@ server.use('/api/info', require('./routes/info.route'));
 
 //turn server
 server.listen(port, () => {
-  //https://smokeye.onrender.com
-  //http://localhost:${port}
-  console.log(`https://smokeye.onrender.com`)
+  console.log(`http://localhost:${port}`)
 })
