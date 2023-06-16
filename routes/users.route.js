@@ -39,7 +39,7 @@ UsersRoutes.get('/reaserchers', async (req, res) => {
 
 // Add New User From Register
 //working
-UsersRoutes.post('/Register', async (req, res) => {
+UsersRoutes.put('/Register', async (req, res) => {
     try {
         console.log('regi :>> ');
         let { firstName,lastName,email,password,phone,address,role,smoke,img,IsActive } = req.body;
