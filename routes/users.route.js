@@ -97,7 +97,7 @@ UsersRoutes.post('/Login', async (req, res) => {
                 reports:`${user.reports}`
         });
         }
-        else{ res.status(404).json()}
+        else{ res.status(404)}
     } catch (error) {
         res.status(500).json({ error });
     }
