@@ -92,7 +92,7 @@ UsersRoutes.post('/Login', async (req, res) => {
             res.status(200).json({
                 firstName:`${user.firstName}`,
                 lastName:`${user.lastName}`,
-                email: `${user.email}`,
+                role:`${user.role}`,
                 image:`${user.img}`,
                 reports:`${user.reports}`
         });
