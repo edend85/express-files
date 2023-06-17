@@ -77,6 +77,10 @@ UsersRoutes.post('/add/:role', async (req, res) => {
         res.status(500).json({ error });
     }
 });*/
+
+/*firstName: user.firstName,
+            lastName: user.lastName,
+            reports:user.reports*/
 UsersRoutes.post('/Login', async (req, res) => {
     try {
         let {email,password} = req.body;
@@ -86,11 +90,7 @@ UsersRoutes.post('/Login', async (req, res) => {
         let result = await UserModel.Login(user.password,password);
         console.log('result :>> ', result);
         if(result){
-            res.status(200).json({
-            firstName: user.firstName,
-            lastName: user.lastName,
-            reports:user.reports
-        });
+            res.status(200).json({user});
         }
         else{ res.status(404).json({ error: "לא נמצא משתמש" })}
     } catch (error) {
