@@ -54,8 +54,6 @@ class User {
     }
 
     static async Login(userPassword,p){
-        console.log('userPassword :>> ', userPassword);
-        console.log('this.pasddword :>> ', p);
         let response = await bcrypt.compare(p,userPassword);
         if(!response){return false;}
         return true;
