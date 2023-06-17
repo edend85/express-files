@@ -86,7 +86,7 @@ UsersRoutes.post('/Login', async (req, res) => {
         let result = await UserModel.Login(user.password,password);
         console.log('result :>> ', result);
         if(result){
-           return res.status(200).json({
+            res.status(200).json({
             "firstName": user.firstName,
             "lastName": user.lastName,
             "reports":user.reports
