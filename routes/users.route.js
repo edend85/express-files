@@ -90,11 +90,11 @@ UsersRoutes.post('/Login', async (req, res) => {
         console.log('result :>> ', result);
         if(result){
             res.status(200).json({
-                firstName:user.firstName,
-                lastName:user.lastName,
-                email: user.email,
-                role:user.role,
-                reports:reports
+                firstName:`${user.firstName}`,
+                lastName:`${user.lastName}`,
+                email: `${user.email}`,
+                role:`${user.role}`,
+                reports:`${user.reports}`
         });
         }
         else{ res.status(404).json({ error: "לא נמצא משתמש" })}
