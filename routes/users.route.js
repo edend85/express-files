@@ -98,7 +98,7 @@ UsersRoutes.post('/Login', async (req, res) => {
         });
         }
         else{
-             res.status(401).json("notExsist")}
+            res.status(401).json({ error: "משתמש לא קיים" })}
     } catch (error) {
         res.status(500).json({ error });
     }
