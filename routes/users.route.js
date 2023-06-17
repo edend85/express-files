@@ -82,12 +82,14 @@ UsersRoutes.post('/Login', async (req, res) => {
         let {email,password} = req.body;
         let user = await UserModel.FindbyEmail(email);
         if(!user){return undefined}
+        console.log('user :>> ', user);
         let result = await UserModel.Login(user.password,password);
+        console.log('result :>> ', result);
         if(result){
            return res.status(200).json({
-            firstName: user.firstName,
-            lastName: user.lastName,
-            reports:user.reports
+            "firstName": user.firstName,
+            "lastName": user.lastName,
+            "reports":user.reports
         });
         }
         else{ res.status(404).json({ error: "לא נמצא משתמש" })}
