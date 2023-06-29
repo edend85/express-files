@@ -3,10 +3,11 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build":"npm i"
+    "build": "npm i"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cloudinary": "^1.37.3",
     "cors": "^2.8.5",
     "dotenv": "^16.1.4",
     "express": "^4.18.2",
