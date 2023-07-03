@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const DB = require('./utils/db');
-const uploadImage = require('./uploadImage');
 
 
 // Only for Dev
@@ -12,17 +11,14 @@ const db = new DB();
 const port = process.env.PORT || 3000;
 //creating server
 let server = express();
-server.use(express.json());
+server.use(express.json({ limit: '100mb'}));
 server.use(cors());
 
 //creating routes
 //1.users
 server.use('/api/users', require('./routes/users.route'));
 
-
-server.post("/uploadImage", (req, res) => {
-  uploadImage(req.body.image).then((url) => res.send(url)).catch((err) => res.status(500).send(err));
-});
+server.use('/api/upload', require('./routes/upload.route'))
 
 //2.reports
 server.use('/api/reports', require('./routes/reports.route'));
