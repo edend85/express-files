@@ -41,10 +41,14 @@ ReportsRoutes.put('/AddReport', async (req, res) => {
     try {
         //let { userId } = req.params;
         //let {date,type,location,address,place,details,image,reporter} = req.body;
+        console.log('hi :>> ');
         let {doc,email}=req.body;
+        console.log('doc :>> ', doc);
+        console.log('email :>> ', email);
         let data = await ReportModel.InsertNewReport(doc,email);
         res.status(200).json(data);
     } catch (error) {
+        
         res.status(500).json({ error });
     }
 });
