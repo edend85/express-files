@@ -50,16 +50,16 @@ class Report{
         this.reporter = reporter;
         return await new DB().InsertNewReport('Reports',{...this});
     }*/
-    static async InsertNewReport(date,type,location,address,place,details,image,reporter,email){
-        this.date = date;
-        this.type = type;
-        this.location = location;
-        this.address = address;
-        this.place = place;
-        this.details = details;
-        this.image = image;
-        this.reporter = reporter;
-        return await new DB().InsertNewReport('Reports',{...this},email);
+    static async InsertNewReport(report,q){
+        this.date = report.date;
+        this.type = report.type;
+        this.location = report.location;
+        this.address = report.address;
+        this.place = report.place;
+        this.details = report.details;
+        this.image = report.image;
+        this.reporter = report.reporter;
+        return await new DB().InsertNewReport('Reports',{...this},q);
     }
 }
 
