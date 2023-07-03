@@ -163,7 +163,7 @@ class DB {
             await this.client.db(this.db_name).collection(collection).insertOne(doc);
             console.log('exsist :>> ');
             return await this.client.db(this.db_name).collection('Users').UpdateOne(
-                { email: user.email },
+                { _id: user._id },
                 {$push:{reports:new ObjectId(report_Id)}}
                 )
         } catch (error) {
