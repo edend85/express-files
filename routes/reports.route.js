@@ -51,8 +51,8 @@ ReportsRoutes.put('/AddReport', async (req, res) => {
             reporter:req.body.reporter
         }
         console.log('doc :>> ',report );
-        console.log('email :>> ',email );
-        let data = await ReportModel.InsertNewReport(report,email);
+        let query = {"email":{$eq:email}}
+        let data = await ReportModel.InsertNewReport(report,query);
         res.status(200).json(data);
     } catch (error) {
         console.log('err :>> ',error);
