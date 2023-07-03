@@ -40,8 +40,9 @@ ReportsRoutes.get('/userId', async (req, res) => {
 ReportsRoutes.put('/AddReport', async (req, res) => {
     try {
         //let { userId } = req.params;
-        let {date,type,location,address,place,details,image,reporter} = req.body;
-        let data = await ReportModel.InsertNewReport(date,type,location,address,place,details,image,reporter);
+        //let {date,type,location,address,place,details,image,reporter} = req.body;
+        let {doc,email}=req.body;
+        let data = await ReportModel.InsertNewReport(doc,email);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error });
