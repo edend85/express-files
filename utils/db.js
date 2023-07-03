@@ -59,9 +59,10 @@ class DB {
     async FindbyEmail(collection,query={},project={}){
         try{
             await this.client.connect();
-            console.log('1 :>> ');
+            console.log('inside function FindbyEmail :>> ');
             return await this.client.db(this.db_name).collection(collection).findOne(query,project);
         }catch(error){
+            console.log('error :>> ', error);
             throw error;
         }
         finally {
