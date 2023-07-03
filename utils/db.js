@@ -154,11 +154,17 @@ class DB {
             await this.client.close();
         }
     }
-    async InsertNewReport(collection, doc) {
+    async InsertNewReport(collection, doc,email) {
         try {
             await this.client.connect();
-            //let id = new ObjectId(userId);
-            return await this.client.db(this.db_name).collection(collection).insertOne(doc);
+            let user = await this.FindbyEmail('Users',email);
+            console.log('user :>> ', user);
+            let report_Id = await this.client.db(this.db_name).collection(collection).insertOne(doc);
+            console.log('report_Id :>> ', report_Id);
+            return await this.client.db(this.db_name).collection('Users').UpdateOne(
+                { email: user.email },
+                {$push:{reports:new ObjectId(report_Id)}}
+                )
         } catch (error) {
             throw error;
         }
