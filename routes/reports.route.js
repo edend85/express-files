@@ -38,14 +38,24 @@ ReportsRoutes.get('/userId', async (req, res) => {
 });
 //working
 ReportsRoutes.put('/AddReport', async (req, res) => {
+    let {email} = req.body;
     try {
-        let {date,type,location,address,place,details,image,reporter} = req.body;
-        //let {doc,email}=req.body;
-        console.log('doc :>> ', date,type,location,address,place,details,image,reporter);
-        let data = await ReportModel.InsertNewReport(date,type,location,address,place,details,image,reporter);
+        let report = {
+            date:req.body.date,
+            type:req.body.type,
+            location:req.body.location,
+            address:req.body.address,
+            place:req.body.place,
+            details:req.body.details,
+            image:req.body.image,
+            reporter:req.body.reporter
+        }
+        console.log('doc :>> ',report );
+        console.log('email :>> ',email );
+        let data = await ReportModel.InsertNewReport(report,email);
         res.status(200).json(data);
     } catch (error) {
-        console.log('hi :>> ');
+        console.log('err :>> ',error);
         res.status(500).json({ error });
     }
 });
