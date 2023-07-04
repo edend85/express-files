@@ -11,9 +11,6 @@ UsersRoutes.get('/', async (req, res) => {
         res.status(500).json({ error });
     }
 });
-
-
-
 // Get All Regulators - Work!
 UsersRoutes.get('/regulators', async (req, res) => {
     try {
@@ -23,8 +20,6 @@ UsersRoutes.get('/regulators', async (req, res) => {
         res.status(500).json({ error });
     }
 });
-
-
 // Get All Reasercher - Work!
 UsersRoutes.get('/reaserchers', async (req, res) => {
     try {
@@ -34,9 +29,6 @@ UsersRoutes.get('/reaserchers', async (req, res) => {
         res.status(500).json({ error });
     }
 });
-
-
-
 // Add New User From Register
 //working
 UsersRoutes.put('/Register', async (req, res) => {
@@ -50,8 +42,6 @@ UsersRoutes.put('/Register', async (req, res) => {
         res.status(500).json({ error });
     }
 });
-
-
 // Add New User From role
 // working
 UsersRoutes.post('/add/:role', async (req, res) => {
@@ -65,27 +55,12 @@ UsersRoutes.post('/add/:role', async (req, res) => {
     }
 });
 
-
-/*UsersRoutes.post('/FindbyEmail', async (req, res) => {
-    try {
-        let {email} = req.body;
-        console.log('2 :>> ', email);
-        let data = await UserModel.FindbyEmail(email);
-        console.log('data :>> ', data);
-        res.status(200).json(data);
-    } catch (error) {
-        res.status(500).json({ error });
-    }
-});*/
-
-/*firstName: user.firstName,
-            lastName: user.lastName,
-            reports:user.reports*/
 UsersRoutes.post('/Login', async (req, res) => {
     try {
         let {email,password} = req.body;
         let user = await UserModel.FindbyEmail(email);
         if(!user){return undefined}
+        console.log('user :>> ', user);
         let result = await UserModel.Login(user.password,password);
         console.log('result :>> ', result);
         if(result){
@@ -103,6 +78,15 @@ UsersRoutes.post('/Login', async (req, res) => {
         res.status(500).json({ error });
     }
 });
+
+
+
+
+
+
+
+
+//check again
 UsersRoutes.put('/:id', async (req, res) => {
     try {
         let { email,password } = req.params;
@@ -113,8 +97,7 @@ UsersRoutes.put('/:id', async (req, res) => {
     }
 });
 
-
-//Add ObjectId
+//todo
 UsersRoutes.delete('/:id', async (req, res) => {
     try {
         let { id } = req.params;
