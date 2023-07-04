@@ -40,26 +40,11 @@ class DB {
         }
     }
 
-
-
     //user actions
-    async FindUserbyId(collection, id) {
-        try {
-            await this.client.connect();
-            let userId = await new ObjectId(id);
-            let query = await {_id:{$eq:userId}}
-            return await this.client.db(this.db_name).collection(collection).findOne(query);
-        } catch (error) {
-            throw error;
-        }
-        finally {
-            await this.client.close();
-        }
-    }
     async FindbyEmail(collection,query={},project={}){
         try{
             await this.client.connect();
-            console.log('inside function FindbyEmail :>> ');
+            console.log('inside function FindbyEmail :>> ',collection,query);
             return await this.client.db(this.db_name).collection(collection).findOne(query,project);
         }catch(error){
             console.log('error :>> ', error);
@@ -69,17 +54,6 @@ class DB {
             await this.client.close();
         }
     }
-    /*async Login(collection, query={},project={}) {
-        try {
-            await this.client.connect();
-            return await this.client.db(this.db_name).collection(collection).find({},{});
-        } catch (error) {
-            throw error;
-        }
-        finally {
-            await this.client.close();
-        }
-    }*/
     async UpdateUser(collection, query) {
         try {
             await this.client.connect();
@@ -142,12 +116,14 @@ class DB {
             await this.client.close();
         }
     }
-    async ShowUserReports(collection, id) {
+    async ShowUserReports(collection, user) {
         try {
             await this.client.connect();
-            let query = await{_id: new ObjectId(id)}
-            let project = await {reports:1}
-            return await this.client.db(this.db_name).collection(collection).find(query, project).toArray();
+            let query = {_id: new ObjectId(user._id)}
+            let project = {reports:1}
+            let reports =  await this.client.db(this.db_name).collection(collection).find(query, project).toArray();
+            console.log('reports :>> ', reports);
+            return reports
         } catch (error) {
             throw error;
         }
@@ -155,14 +131,13 @@ class DB {
             await this.client.close();
         }
     }
-    async InsertNewReport(collection, doc,query) {
+    //working
+    async InsertNewReport(collection, doc,user) {
         try {
             await this.client.connect();
             let report = await this.client.db(this.db_name).collection(collection).insertOne(doc);
-            console.log('exsist :>> ',report);
-            let user = await this.FindbyEmail('Users',query);
-            console.log('user :>> ', user);
-            return await this.client.db(this.db_name).collection('Users').updateOne({_id:{$eq:user._id}},{$set:{reports:new ObjectId(report.insertedId)}})
+            console.log('report :>> ', report);
+            return await this.client.db(this.db_name).collection('Users').updateOne({_id:{$eq:new ObjectId(user._id)}},{$push:{reports:report.insertedId}})
         } catch (error) {
             throw error;
         }
