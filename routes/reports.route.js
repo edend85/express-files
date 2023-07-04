@@ -26,15 +26,15 @@ ReportsRoutes.get('/:city', async (req, res) => {
 
 
 
-ReportsRoutes.get('/userId', async (req, res) => {
+ReportsRoutes.post('/ShowMyReports', async (req, res) => {
     try {
-        let { userId } = req.params;
-        let data = await ReportModel.ShowUserReports(userId);
+        let {email} = req.body;
+        console.log('email :>> ', email);
+        let data = await ReportModel.ShowUserReports(email);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error });
     }
-    console.log('3');
 });
 //working
 ReportsRoutes.put('/AddReport', async (req, res) => {
@@ -50,8 +50,7 @@ ReportsRoutes.put('/AddReport', async (req, res) => {
             image:req.body.image,
             reporter:req.body.reporter
         }
-        let query = {"email":{$eq:email}}
-        let data = await ReportModel.InsertNewReport(report,query);
+        let data = await ReportModel.InsertNewReport(report,email);
         res.status(200).json(data);
     } catch (error) {
         console.log('err :>> ',error);
