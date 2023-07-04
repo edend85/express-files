@@ -50,7 +50,6 @@ ReportsRoutes.put('/AddReport', async (req, res) => {
             image:req.body.image,
             reporter:req.body.reporter
         }
-        console.log('doc :>> ',report );
         let query = {"email":{$eq:email}}
         let data = await ReportModel.InsertNewReport(report,query);
         res.status(200).json(data);
