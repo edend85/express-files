@@ -38,19 +38,19 @@ ReportsRoutes.post('/ShowMyReports', async (req, res) => {
 });
 //working
 ReportsRoutes.put('/AddReport', async (req, res) => {
-    let {email} = req.body;
+    let {date,type,location,address,place,details,image,reporter,email} = req.body;
     try {
         let report = {
-            date:req.body.date,
-            type:req.body.type,
-            location:req.body.location,
-            address:req.body.address,
-            place:req.body.place,
-            details:req.body.details,
-            image:req.body.image,
-            reporter:req.body.reporter
+            date:date,
+            type:type,
+            location:location,
+            address:address,
+            place:place,
+            details:details,
+            image:image,
+            reporter:reporter
         }
-        let data = await ReportModel.InsertNewReport(report,email);
+        let data = await ReportModel.InsertNewReport(date,type,location,address,place,details,image,reporter,email);
         res.status(200).json(data);
     } catch (error) {
         console.log('err :>> ',error);
