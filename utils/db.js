@@ -158,14 +158,11 @@ class DB {
     async InsertNewReport(collection, doc,query) {
         try {
             await this.client.connect();
+            let report = await this.client.db(this.db_name).collection(collection).insertOne(doc);
+            console.log('exsist :>> ',report);
             let user = await this.FindbyEmail('Users',query);
             console.log('user :>> ', user);
-            await this.client.db(this.db_name).collection(collection).insertOne(doc);
-            console.log('exsist :>> ');
-            return await this.client.db(this.db_name).collection('Users').UpdateOne(
-                { _id: user._id },
-                {$push:{reports:new ObjectId(report_Id)}}
-                )
+            return await this.client.db(this.db_name).collection('Users').updateOne({_id:{$eq:user._id}},{$set:{reports:new ObjectId(report.insertedId)}})
         } catch (error) {
             throw error;
         }
