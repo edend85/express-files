@@ -25,7 +25,6 @@ class Report{
         return await new DB().ShowAllReports('Reports');
     }
 
-
     // Work !
     static async ShowReportByCity(city) {
         let query = { "address.city": city }
@@ -33,24 +32,13 @@ class Report{
         return await new DB().ShowReportByCity('Reports', query);
     }
 
-
-
-    static async ShowUserReports(userId) {
-        return await new DB().ShowUserReports('Reports',userId);
+    static async ShowUserReports(email) {
+        let query = {"email":{$eq:email}}
+        let user = await new DB().FindbyEmail('Users',query)
+        return await new DB().ShowUserReports('Reports',user);
     }
-
-    /*static async InsertNewReport(date,type,location,address,place,details,image,reporter) {
-        this.date = date;
-        this.type = type;
-        this.location = location;
-        this.address = address;
-        this.place = place;
-        this.details = details;
-        this.image = image;
-        this.reporter = reporter;
-        return await new DB().InsertNewReport('Reports',{...this});
-    }*/
-    static async InsertNewReport(report,q){
+    // Work !
+    static async InsertNewReport(report,email){
         this.date = report.date;
         this.type = report.type;
         this.location = report.location;
@@ -59,7 +47,11 @@ class Report{
         this.details = report.details;
         this.image = report.image;
         this.reporter = report.reporter;
-        return await new DB().InsertNewReport('Reports',{...this},q);
+        let query = {"email":{$eq:email}}
+        let user = await new DB().FindbyEmail('Users',query);
+        console.log('pass user :>> ',user);
+        return await new DB().InsertNewReport('Reports',{...this},user);
+        
     }
 }
 
