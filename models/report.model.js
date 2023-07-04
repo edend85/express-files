@@ -38,15 +38,16 @@ class Report{
         return await new DB().ShowUserReports('Reports',user);
     }
     // Work !
-    static async InsertNewReport(report,email){
-        this.date = report.date;
-        this.type = report.type;
-        this.location = report.location;
-        this.address = report.address;
-        this.place = report.place;
-        this.details = report.details;
-        this.image = report.image;
-        this.reporter = report.reporter;
+    static async InsertNewReport(date,type,location,address,place,details,image,reporter,email)
+    {
+        this.date = date;
+        this.type = type;
+        this.location = location;
+        this.address = address;
+        this.place = place;
+        this.details = details;
+        this.image = image;
+        this.reporter = reporter;
         let query = {"email":{$eq:email}}
         let user = await new DB().FindbyEmail('Users',query);
         console.log('pass user :>> ',user);
