@@ -116,14 +116,43 @@ class DB {
             await this.client.close();
         }
     }
-    async ShowUserReports(collection, user) {
+    async FindAllUserReports(collection,user){
         try {
             await this.client.connect();
             let query = {_id: new ObjectId(user._id)}
-            let project = {reports:1}
-            let reports =  await this.client.db(this.db_name).collection(collection).find(query, project).toArray();
+            let reports =  await this.client.db(this.db_name).collection(collection).find(query, {reports:1}).toArray();
             console.log('reports :>> ', reports);
             return reports
+        } catch (error) {
+            throw error;
+        }
+        finally {
+            await this.client.close();
+        }
+
+    }
+    async ShowUserReports(collection, user) {
+        try {
+            console.log('Show User Reports :>> ',user);
+            await this.client.connect();
+         const aggregationQuery = [
+                {
+                  $match: {
+                    userId: new ObjectId(user._id)
+                  }
+                },
+                {
+                  $lookup: {
+                    from: 'reports',
+                    localField: 'reports',
+                    foreignField: '_id',
+                    as: 'userReports'
+                  }
+                }
+              ];
+            let userReports = await this.client.db(this.db_name).collection(collection).aggregate(aggregationQuery).toArray();
+            console.log('userReports:', userReports);
+            return userReports;
         } catch (error) {
             throw error;
         }
