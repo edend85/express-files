@@ -64,7 +64,7 @@ class User {
         let query = {$and:[{"email":{$eq:e},"password":{$eq:p}}]};
         return await new DB().UpdateUser('Users',query);
     }
-    static async InsertUser(firstName,lastName,email,password,phone,address,role,smoke,img,isActive,countReports){
+    static async InsertUser(firstName,lastName,email,password,phone,address,role,smoke,img,isActive){
        this.firstName = firstName;
        this.lastName = lastName;
        this.email = email;
@@ -75,7 +75,6 @@ class User {
        this.smoke = smoke;
        this.img = img;
        this.isActive = isActive;
-       this.countReports = countReports;
        
         return await new DB().InsertUser('Users',{...this});
     }
