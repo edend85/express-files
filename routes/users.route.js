@@ -69,7 +69,8 @@ UsersRoutes.post('/Login', async (req, res) => {
                 lastName:`${user.lastName}`,
                 role:`${user.role}`,
                 image:`${user.img}`,
-                reports:`${user.reports}`
+                reports:`${user.reports}`,
+                email:`${user.email}`
         });
         }
         else{
