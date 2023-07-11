@@ -34,8 +34,8 @@ UsersRoutes.get('/reaserchers', async (req, res) => {
 UsersRoutes.put('/Register', async (req, res) => {
     try {
         console.log('regi :>> ');
-        let { firstName,lastName,email,password,phone,address,role,smoke,img,IsActive,countReports } = req.body;
-        let data = await UserModel.InsertUser(firstName,lastName,email,password,phone,address,role,smoke,img,IsActive,countReports);
+        let { firstName,lastName,email,password,phone,address,role,smoke,img,IsActive } = req.body;
+        let data = await UserModel.InsertUser(firstName,lastName,email,password,phone,address,role,smoke,img,IsActive);
         console.log('data :>> ',data);
         res.status(200).json(data);
     } catch (error) {
