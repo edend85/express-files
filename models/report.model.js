@@ -36,7 +36,6 @@ class Report{
     static async ShowUserReports(email) {
         let query = {"email":{$eq:email}}
         let user = await new DB().FindbyEmail('Users',query);
-        //console.log('reportArr :>> ', user.reports);
         return await new DB().ShowUserReports('Users',user);
     }
     // Work !
