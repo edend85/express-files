@@ -52,7 +52,7 @@ class Report{
         this.place = place;
         this.details = details;
         this.image = image;
-        this.reporter = user.firstName + user.lastName;
+        this.reporter = user.firstName +" "+ user.lastName;
         this.userId = user._id;
         return await new DB().InsertNewReport('Reports',{...this},user);
         
