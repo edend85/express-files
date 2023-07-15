@@ -36,7 +36,7 @@ class Report{
     static async ShowUserReports(email) {
         let query = {"email":{$eq:email}}
         let user = await new DB().FindbyEmail('Users',query);
-        return await new DB().ShowUserReports('Users',user);
+        return await new DB().ShowUserReports('Reports',user);
     }
     // Work !
     static async InsertNewReport(date,type,location,address,place,details,image,reporter,email)
