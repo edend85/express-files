@@ -133,7 +133,7 @@ class DB {
     }
     async ShowUserReports(collection, user) {
         try {
-            console.log('Show User Reports :>> ',user);
+            console.log('Show User Reports :>> ',user._id);
             await this.client.connect();
         let query = {"userId":{$eq:user._id}}
             let userReports = await this.client.db(this.db_name).collection(collection).find(query).toArray();
