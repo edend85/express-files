@@ -10,6 +10,7 @@ class Report{
     details;
     image;
     reporter;
+    userId;
     
 
     constructor(type,details,image,address){
@@ -17,7 +18,7 @@ class Report{
         this.type = type;
         this.details = details;
         this.image = image;
-        this.address = [{street:address.street,streetNum:address.number, city:address.city}];   
+        this.address = [{street:address.street,streetNum:address.number, city:address.city}]; 
     }
 
     // Work !
@@ -41,6 +42,9 @@ class Report{
     // Work !
     static async InsertNewReport(date,type,location,address,place,details,image,reporter,email)
     {
+        let query = {"email":{$eq:email}}
+        let user = await new DB().FindbyEmail('Users',query);
+        console.log('pass user :>> ',user);
         this.date = date;
         this.type = type;
         this.location = location;
@@ -49,9 +53,7 @@ class Report{
         this.details = details;
         this.image = image;
         this.reporter = reporter;
-        let query = {"email":{$eq:email}}
-        let user = await new DB().FindbyEmail('Users',query);
-        console.log('pass user :>> ',user);
+        this.userId = user._id;
         return await new DB().InsertNewReport('Reports',{...this},user);
         
     }
