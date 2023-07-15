@@ -138,19 +138,11 @@ class DB {
          const aggregationQuery = [
                 {
                   $match: {
-                    userId: new ObjectId(user._id)
-                  }
-                },
-                {
-                  $lookup: {
-                    from: 'reports',
-                    localField: 'reports',
-                    foreignField: '_id',
-                    as: 'userReports'
+                    userId: user._id
                   }
                 }
               ];
-            let userReports = await this.client.db(this.db_name).collection(collection).aggregate(aggregationQuery).toArray();
+            let userReports = await this.client.db(this.db_name).collection(collection).find(aggregationQuery).toArray();
             console.log('userReports:', userReports);
             return userReports;
         } catch (error) {
