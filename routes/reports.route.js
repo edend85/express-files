@@ -40,20 +40,9 @@ ReportsRoutes.post('/ShowMyReports', async (req, res) => {
 ReportsRoutes.put('/AddReport', async (req, res) => {
     let {date,type,location,address,place,details,image,reporter,email} = req.body;
     try {
-        let report = {
-            date:date,
-            type:type,
-            location:location,
-            address:address,
-            place:place,
-            details:details,
-            image:image,
-            reporter:reporter
-        }
         let data = await ReportModel.InsertNewReport(date,type,location,address,place,details,image,reporter,email);
         res.status(200).json(data);
     } catch (error) {
-        console.log('err :>> ',error);
         res.status(500).json({ error });
     }
 });
