@@ -135,14 +135,8 @@ class DB {
         try {
             console.log('Show User Reports :>> ',user);
             await this.client.connect();
-         const aggregationQuery = [
-                {
-                  $match: {
-                    userId: user._id
-                  }
-                }
-              ];
-            let userReports = await this.client.db(this.db_name).collection(collection).find(aggregationQuery).toArray();
+        let query = {userId:{$eq:user._id}}
+            let userReports = await this.client.db(this.db_name).collection(collection).find(query).toArray();
             console.log('userReports:', userReports);
             return userReports;
         } catch (error) {
