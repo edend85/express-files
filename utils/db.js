@@ -135,7 +135,7 @@ class DB {
         try {
             console.log('Show User Reports :>> ',user);
             await this.client.connect();
-        let query = {userId:{$eq:user._id}}
+        let query = {"userId":{$eq:user._id}}
             let userReports = await this.client.db(this.db_name).collection(collection).find(query).toArray();
             console.log('userReports:', userReports);
             return userReports;
