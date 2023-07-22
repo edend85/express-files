@@ -41,9 +41,6 @@ class Report{
     // Work !
     static async InsertNewReport(date,type,location,address,place,details,image,reporter,email)
     {
-        let query = {"email":{$eq:email}}
-        let user = await new DB().FindbyEmail('Users',query);
-        console.log('pass user :>> ',user);
         this.date = date;
         this.type = type;
         this.location = location;
@@ -51,9 +48,19 @@ class Report{
         this.place = place;
         this.details = details;
         this.image = image;
-        this.reporter = user.firstName +" "+ user.lastName;
-        this.userId = user._id;
-        return await new DB().InsertNewReport('Reports',{...this},user);
+        this.reporter = "Anonymous"
+        if(email){
+            let query = {"email":{$eq:email}}
+            let user = await new DB().FindbyEmail('Users',query);
+            console.log('pass user :>> ',user);
+            this.reporter = user.firstName +" "+ user.lastName;
+            this.userId = user._id;
+            return await new DB().InsertNewReport('Reports',{...this},user);
+        }
+        else{
+            return await new DB().InsertNewReport('Reports',{...this});
+
+        }
         
     }
 }
