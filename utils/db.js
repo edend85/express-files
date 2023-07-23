@@ -54,11 +54,10 @@ class DB {
             await this.client.close();
         }
     }
-    async UpdateUser(collection, query) {
+    async UpdateUser(collection, user,updatedUser) {
         try {
             await this.client.connect();
-            let doc = FindOneUser('Users', query)
-            return await this.client.db(this.db_name).collection(collection).UpdateOne(doc);
+            return await this.client.db(this.db_name).collection(collection).UpdateOne({_id:{$eq:new ObjectId(user._id)}},{$set:{updatedUser}});
         } catch (error) {
             throw error;
         }
