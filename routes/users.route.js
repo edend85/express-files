@@ -79,6 +79,42 @@ UsersRoutes.post('/Login', async (req, res) => {
         res.status(500).json({ error });
     }
 });
+UsersRoutes.post('/UpdateUser', async (req, res) => {
+    try {
+        /*firstName,lastName,email,password,phone,address,role,smoke,img,IsActive*/ 
+        let {currentE,UpdatedUser} = req.body;
+        let user = await UserModel.FindbyEmail(currentE);
+        if(!user){return undefined}
+        /*let updatedUser = {
+            firstName:`${firstName}`,
+            lastName:`${lastName}`,
+            email:`${email}`,
+            password:`${password}`,
+            phone:`${phone}`,
+            address:`${address}`,
+            role:`${role}`,
+            smoke:`${smoke}`,
+            image:`${img}`,
+            IsActive:`${IsActive}`
+        }*/
+        console.log('user :>> ', user);
+        let result = await UserModel.UpdateUser(user,UpdatedUser);
+        console.log('result :>> ', result);
+        if(result){
+            res.status(200).json({
+                firstName:`${user.firstName}`,
+                lastName:`${user.lastName}`,
+                email:`${user.email}`,
+                role:`${user.role}`,
+                image:`${user.img}`,
+        });
+        }
+        else{
+            res.status(401).json({ error: "משתמש לא קיים" })}
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+});
 
 
 
