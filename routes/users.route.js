@@ -85,7 +85,7 @@ UsersRoutes.put('/UpdateUser', async (req, res) => {
     try {
         let {currentE,firstName,lastName,email,phone,address} = req.body;
         let user = await UserModel.FindbyEmail(currentE);
-        if(!user){return undefined}
+        if(!user){throw error}
         console.log('user :>> ', user);
         let result = await UserModel.UpdateUser(user,firstName,lastName,email,phone,address);
         console.log('result :>> ', result);
