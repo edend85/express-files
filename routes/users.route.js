@@ -67,10 +67,11 @@ UsersRoutes.post('/Login', async (req, res) => {
             res.status(200).json({
                 firstName:`${user.firstName}`,
                 lastName:`${user.lastName}`,
+                email:`${user.email}`,
+                address:`${user.address}`,
                 role:`${user.role}`,
                 image:`${user.img}`,
-                reports:`${user.reports}`,
-                email:`${user.email}`
+                reports:`${user.reports}`  
         });
         }
         else{
@@ -82,23 +83,11 @@ UsersRoutes.post('/Login', async (req, res) => {
 UsersRoutes.post('/UpdateUser', async (req, res) => {
     try {
         /*firstName,lastName,email,password,phone,address,role,smoke,img,IsActive*/ 
-        let {currentE,UpdatedUser} = req.body;
+        let {currentE,firstName,lastName,email,phone,address} = req.body;
         let user = await UserModel.FindbyEmail(currentE);
         if(!user){return undefined}
-        /*let updatedUser = {
-            firstName:`${firstName}`,
-            lastName:`${lastName}`,
-            email:`${email}`,
-            password:`${password}`,
-            phone:`${phone}`,
-            address:`${address}`,
-            role:`${role}`,
-            smoke:`${smoke}`,
-            image:`${img}`,
-            IsActive:`${IsActive}`
-        }*/
         console.log('user :>> ', user);
-        let result = await UserModel.UpdateUser(user,UpdatedUser);
+        let result = await UserModel.UpdateUser(user,firstName,lastName,email,phone,address);
         console.log('result :>> ', result);
         if(result){
             res.status(200).json({
