@@ -68,7 +68,12 @@ UsersRoutes.post('/Login', async (req, res) => {
                 firstName:`${user.firstName}`,
                 lastName:`${user.lastName}`,
                 email:`${user.email}`,
-                address:`${[user.address[0].street,user.address[0].streetNum,user.address[0].city]}`,
+                address:`${
+                    [{
+                        street:user.address[0].street,
+                        streetNum:user.address[0].streetNum,
+                        city:user.address[0].city}
+                    ]}`,
                 role:`${user.role}`,
                 image:`${user.img}`,
                 reports:`${user.reports}`  
