@@ -81,9 +81,8 @@ UsersRoutes.post('/Login', async (req, res) => {
         res.status(500).json({ error });
     }
 });
-UsersRoutes.post('/UpdateUser', async (req, res) => {
+UsersRoutes.put('/UpdateUser', async (req, res) => {
     try {
-        /*firstName,lastName,email,password,phone,address,role,smoke,img,IsActive*/ 
         let {currentE,firstName,lastName,email,phone,address} = req.body;
         let user = await UserModel.FindbyEmail(currentE);
         if(!user){return undefined}
