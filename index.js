@@ -7,7 +7,6 @@ const DB = require('./utils/db');
 
 // Only for Dev
 const db = new DB();
-
 const port = process.env.PORT || 3000;
 //creating server
 let server = express();
