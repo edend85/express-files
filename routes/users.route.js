@@ -62,7 +62,6 @@ UsersRoutes.post('/Login', async (req, res) => {
         if(!user){return undefined}
         console.log('user :>> ', user);
         let result = await UserModel.Login(user.password,password);
-        console.log('result :>> ', result);
         if(result){
             res.status(200).json({
                 firstName:`${user.firstName}`,
