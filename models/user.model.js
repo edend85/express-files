@@ -50,7 +50,6 @@ class User {
         return await new DB().FindUserbyId('users',id);
     }
     static async FindbyEmail(email){
-        console.log('start :>> ');
         let query = {"email":{$eq:email}}
         return await new DB().FindbyEmail('Users',query);
     }
