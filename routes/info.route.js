@@ -9,7 +9,6 @@ InfoRoutes.get('/', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error });
     }
-    console.log('3');
 });
 //working
 InfoRoutes.put('/', async (req, res) => {
