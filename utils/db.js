@@ -171,6 +171,18 @@ class DB {
             await this.client.close();
         }
     }
+    async deleteReport(collection,id){
+        try{
+            console.log('3 :>> ', id);
+            await this.client.connect();
+            return await this.client.db(this.db_name).collection(collection).deleteOne({_id:{$eq:new ObjectId(id)}});
+        }catch(error){
+            throw error;
+        }
+        finally{
+            await this.client.close();
+        }
+    }
     //info actions
     async ShowAllQuerys(collection, query = {}, project = {}) {
         try {
