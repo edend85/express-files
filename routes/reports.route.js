@@ -24,6 +24,16 @@ ReportsRoutes.get('/:city', async (req, res) => {
     }
 });
 
+ReportsRoutes.delete('/DeleteReport',async(req,res)=>{
+    try{
+        let {id} = req.body;
+        console.log('1 :>> ', id);
+        await ReportModel.deleteReport(id);
+        res.status(200).json();
+    }catch(error){
+        res.status(500).json({ error });
+    }
+})
 
 
 ReportsRoutes.post('/ShowMyReports', async (req, res) => {
