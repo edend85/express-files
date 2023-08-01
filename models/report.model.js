@@ -63,6 +63,10 @@ class Report{
         }
         
     }
+    static async deleteReport(id){
+        console.log('2 :>> ', id);
+        return await new DB().deleteReport('Reports',id);
+    }
 }
 
 
