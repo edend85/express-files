@@ -11,10 +11,10 @@ InfoRoutes.get('/', async (req, res) => {
     }
 });
 //working
-InfoRoutes.put('/', async (req, res) => {
+InfoRoutes.put('/addInfo', async (req, res) => {
     try {
-        let {title,description} = req.body;
-        let data = await InfoModel.AddQuery(title,description);
+        let {title,content,infoFor} = req.body;
+        let data = await InfoModel.AddQuery(title,content,infoFor);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error });
@@ -23,8 +23,8 @@ InfoRoutes.put('/', async (req, res) => {
 InfoRoutes.put('/:id', async (req, res) => {
     try {
         let {id} = req.params;
-        let { description } = req.body;
-        let data = await InfoModel.UpdateQuery(id,description);
+        let { content } = req.body;
+        let data = await InfoModel.UpdateQuery(id,content);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error });

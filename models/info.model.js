@@ -3,26 +3,30 @@ const DB = require('../utils/db');
 class Info{
 
     title;
-    description;
-    constructor(title,description){
+    content;
+    infoFor;
+
+    constructor(title,content, infoFor){
         this.title = title;
-        this.description = description;
+        this.content = content;
+        this.infoFor = infoFor;
     }
 
     static async ShowAllQuerys() {
         return await new DB().ShowAllQuerys('Information');
     }
-    static async AddQuery(title,description) {
+    static async AddQuery(title,content,infoFor) {
         this.title = title
-        this.description = description
+        this.content = content
+        this.infoFor = infoFor;
         return await new DB().AddQuery('Information',{...this});
     }
     //aggrgtion
     static async UpdateQuery(id,des) {
         this.id = id;
-        this.description = des;
+        this.content = des;
         let query = {"infoId":{$eq:id}}
-        let desUpdate = (description,{$set:des});
+        let desUpdate = (content,{$set:des});
         return await new DB().UpdateQuery('Information',query,desUpdate);
     }
 }
