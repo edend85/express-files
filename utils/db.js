@@ -207,16 +207,30 @@ class DB {
         }
     }
     async UpdateQuery(collection, query, doc) {
+        console.log(collection)
         try {
             await this.client.connect();
             return await this.client.db(this.db_name).collection(collection).updateOne(query, doc);
         } catch (error) {
             throw error;
-        }
-        finally {
+        } finally {
             await this.client.close();
         }
     }
+
+    async deleteInfo(collection,id){
+        try{
+            await this.client.connect();
+            return await this.client.db(this.db_name).collection(collection).deleteOne({_id:{$eq:new ObjectId(id)}});
+        }catch(error){
+            throw error;
+        }
+        finally{
+            await this.client.close();
+        }
+    }
+
+    
 
 }
 module.exports = DB;

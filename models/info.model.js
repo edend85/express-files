@@ -1,4 +1,6 @@
 const DB = require('../utils/db');
+const { ObjectId } = require('mongodb');
+
 
 class Info{
 
@@ -22,12 +24,24 @@ class Info{
         return await new DB().AddQuery('Information',{...this});
     }
     //aggrgtion
-    static async UpdateQuery(id,des) {
-        this.id = id;
-        this.content = des;
-        let query = {"infoId":{$eq:id}}
-        let desUpdate = (content,{$set:des});
-        return await new DB().UpdateQuery('Information',query,desUpdate);
+    static async UpdateQuery(id, title, content, infoFor) {
+        const query = { _id: new ObjectId(id) }; 
+        const docUpdate = {
+            $set: {
+                title: title,
+                content: content,
+                infoFor: infoFor
+            }
+        };
+
+        console.log("Query:", query);
+        console.log("Update:", docUpdate);
+
+        return await new DB().UpdateQuery('Information', query, docUpdate);
+    }
+
+    static async deleteInfo(id){
+        return await new DB().deleteInfo('Information',id);
     }
 }
 module.exports = Info;
