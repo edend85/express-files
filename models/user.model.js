@@ -15,7 +15,7 @@ class User {
     isActive;
     countReports;
 
-    constructor(userId,firstName,lastName,role,email,password, address,countReports) {
+    constructor(userId,firstName,lastName,role,email,password, address,countReports,isActive) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,7 +23,8 @@ class User {
         this.email = email;
         this.password = password;
         this.address = [{city:address[0],street:address[1],streetNum:address[2]}];
-        this.countReports = countReports;   
+        this.countReports = countReports;  
+        this.isActive = isActive;
     }
 
     // Work !
