@@ -59,7 +59,7 @@ UsersRoutes.post('/Login', async (req, res) => {
     try {
         let {email,password} = req.body;
         let user = await UserModel.FindbyEmail(email);
-        if(!user){console.log('user :>> ', user); return user}
+        if(!user){res.status(400)}
         console.log('user :>> ', user);
         let result = await UserModel.Login(user.password,password);
         if(result){
